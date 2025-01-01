@@ -1,6 +1,12 @@
 package org.imt.tournamentmaster.controller.round;
 
 import org.imt.tournamentmaster.model.match.Round;
+import org.imt.tournamentmaster.repository.equipe.EquipeRepository;
+import org.imt.tournamentmaster.repository.equipe.EquipeRepositoryImpl;
+import org.imt.tournamentmaster.repository.equipe.JoueurRepository;
+import org.imt.tournamentmaster.repository.equipe.JoueurRepositoryImpl;
+import org.imt.tournamentmaster.repository.match.RoundRepository;
+import org.imt.tournamentmaster.repository.match.RoundRepositoryImpl;
 import org.imt.tournamentmaster.service.match.RoundService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,9 +15,13 @@ import java.util.List;
 
 public class RoundServiceTest {
 
-    // TODO-01a : Instancier correctement roundService pour faire compiler et passer les tests
-    // TODO-01b : Comprendre la problématique de devoir instancier plusieurs objets pour n'en tester qu'un seul
-    private final RoundService roundService = new RoundService();
+    private final JoueurRepository joueurRepository = new JoueurRepositoryImpl();
+
+    private final EquipeRepository equipeRepository = new EquipeRepositoryImpl(joueurRepository);
+
+    private final RoundRepository roundRepository = new RoundRepositoryImpl(equipeRepository);
+
+    private final RoundService roundService = new RoundService(roundRepository);
 
     @Test
     public void testGetRoundById() {

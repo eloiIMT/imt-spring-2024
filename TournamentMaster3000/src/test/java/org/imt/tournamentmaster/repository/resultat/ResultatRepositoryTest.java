@@ -2,6 +2,14 @@ package org.imt.tournamentmaster.repository.resultat;
 
 import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.model.resultat.Resultat;
+import org.imt.tournamentmaster.repository.equipe.EquipeRepository;
+import org.imt.tournamentmaster.repository.equipe.EquipeRepositoryImpl;
+import org.imt.tournamentmaster.repository.equipe.JoueurRepository;
+import org.imt.tournamentmaster.repository.equipe.JoueurRepositoryImpl;
+import org.imt.tournamentmaster.repository.match.MatchRepository;
+import org.imt.tournamentmaster.repository.match.MatchRepositoryImpl;
+import org.imt.tournamentmaster.repository.match.RoundRepository;
+import org.imt.tournamentmaster.repository.match.RoundRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -12,9 +20,15 @@ public class ResultatRepositoryTest {
 
     private final static Logger logger = org.slf4j.LoggerFactory.getLogger(ResultatRepositoryTest.class);
 
-    // TODO-02a : Instancier correctement resultatRepository pour faire compiler et passer les tests
-    // TODO-02b : Comprendre l'intérêt de tester l'interface
-    private final ResultatRepository resultatRepository = new ResultatRepositoryImpl();
+    private final JoueurRepository joueurRepository = new JoueurRepositoryImpl();
+
+    private final EquipeRepository equipeRepository = new EquipeRepositoryImpl(joueurRepository);
+
+    private final RoundRepository roundRepository = new RoundRepositoryImpl(equipeRepository);
+
+    private final MatchRepository matchRepository = new MatchRepositoryImpl(equipeRepository, roundRepository);
+
+    private final ResultatRepository resultatRepository = new ResultatRepositoryImpl(matchRepository);
 
     @Test
     public void testFindById() {
