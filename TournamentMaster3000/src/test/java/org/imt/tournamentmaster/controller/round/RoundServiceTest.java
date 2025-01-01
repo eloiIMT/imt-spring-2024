@@ -1,27 +1,19 @@
 package org.imt.tournamentmaster.controller.round;
 
 import org.imt.tournamentmaster.model.match.Round;
-import org.imt.tournamentmaster.repository.equipe.EquipeRepository;
-import org.imt.tournamentmaster.repository.equipe.EquipeRepositoryImpl;
-import org.imt.tournamentmaster.repository.equipe.JoueurRepository;
-import org.imt.tournamentmaster.repository.equipe.JoueurRepositoryImpl;
-import org.imt.tournamentmaster.repository.match.RoundRepository;
-import org.imt.tournamentmaster.repository.match.RoundRepositoryImpl;
 import org.imt.tournamentmaster.service.match.RoundService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+@SpringBootTest
 public class RoundServiceTest {
 
-    private final JoueurRepository joueurRepository = new JoueurRepositoryImpl();
-
-    private final EquipeRepository equipeRepository = new EquipeRepositoryImpl(joueurRepository);
-
-    private final RoundRepository roundRepository = new RoundRepositoryImpl(equipeRepository);
-
-    private final RoundService roundService = new RoundService(roundRepository);
+    @Autowired
+    private RoundService roundService;
 
     @Test
     public void testGetRoundById() {

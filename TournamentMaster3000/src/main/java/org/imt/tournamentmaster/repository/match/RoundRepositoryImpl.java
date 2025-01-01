@@ -4,9 +4,11 @@ import org.imt.tournamentmaster.model.equipe.Equipe;
 import org.imt.tournamentmaster.model.match.Round;
 import org.imt.tournamentmaster.repository.MapRepository;
 import org.imt.tournamentmaster.repository.equipe.EquipeRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Component
 public class RoundRepositoryImpl extends MapRepository<Round> implements RoundRepository {
 
     private final EquipeRepository equipeRepository;

@@ -2,33 +2,21 @@ package org.imt.tournamentmaster.repository.resultat;
 
 import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.model.resultat.Resultat;
-import org.imt.tournamentmaster.repository.equipe.EquipeRepository;
-import org.imt.tournamentmaster.repository.equipe.EquipeRepositoryImpl;
-import org.imt.tournamentmaster.repository.equipe.JoueurRepository;
-import org.imt.tournamentmaster.repository.equipe.JoueurRepositoryImpl;
-import org.imt.tournamentmaster.repository.match.MatchRepository;
-import org.imt.tournamentmaster.repository.match.MatchRepositoryImpl;
-import org.imt.tournamentmaster.repository.match.RoundRepository;
-import org.imt.tournamentmaster.repository.match.RoundRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+@SpringBootTest
 public class ResultatRepositoryTest {
 
     private final static Logger logger = org.slf4j.LoggerFactory.getLogger(ResultatRepositoryTest.class);
 
-    private final JoueurRepository joueurRepository = new JoueurRepositoryImpl();
-
-    private final EquipeRepository equipeRepository = new EquipeRepositoryImpl(joueurRepository);
-
-    private final RoundRepository roundRepository = new RoundRepositoryImpl(equipeRepository);
-
-    private final MatchRepository matchRepository = new MatchRepositoryImpl(equipeRepository, roundRepository);
-
-    private final ResultatRepository resultatRepository = new ResultatRepositoryImpl(matchRepository);
+    @Autowired
+    private ResultatRepository resultatRepository;
 
     @Test
     public void testFindById() {

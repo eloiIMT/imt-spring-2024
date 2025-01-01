@@ -4,9 +4,11 @@ import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.model.resultat.Resultat;
 import org.imt.tournamentmaster.repository.MapRepository;
 import org.imt.tournamentmaster.repository.match.MatchRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Component
 public class ResultatRepositoryImpl extends MapRepository<Resultat> implements ResultatRepository {
 
     private final MatchRepository matchRepository;
