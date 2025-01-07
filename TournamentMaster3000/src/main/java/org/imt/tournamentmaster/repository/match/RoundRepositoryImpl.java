@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+// TODO-02 : Supprimer cette classe qui devient inutile
 @Component
 public class RoundRepositoryImpl extends MapRepository<Round> implements RoundRepository {
 

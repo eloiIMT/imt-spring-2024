@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public class Round {
 
+    // TODO-00 : Convertir cette classe en entité avec l'annotation @Entity et d'autres annotations appropriées sur ses attributs
+
     @JsonIgnore
     private long id;
 
