@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @SpringBootTest
 public class ResultatRepositoryTest {
@@ -19,9 +21,11 @@ public class ResultatRepositoryTest {
     private ResultatRepository resultatRepository;
 
     @Test
+    @Transactional
     public void testFindById() {
         // find a resultat
-        Resultat resultat = resultatRepository.findById(1L);
+
+        Resultat resultat = resultatRepository.findById(1L).get();
 
         // assert
         Assertions.assertNotNull(resultat);
@@ -47,11 +51,11 @@ public class ResultatRepositoryTest {
     @Test
     public void testFindAll() {
         // find all resultats
-        List<Resultat> resultats = resultatRepository.findAll();
+        List<Resultat> resultats = StreamSupport.stream(resultatRepository.findAll().spliterator(), false).toList();
 
         // assert
         Assertions.assertNotNull(resultats);
-        Assertions.assertEquals(1, resultats.size());
+        Assertions.assertEquals(2, resultats.size());
     }
 
 }

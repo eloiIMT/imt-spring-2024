@@ -1,14 +1,16 @@
 package org.imt.tournamentmaster.controller.resultat;
 
 import org.imt.tournamentmaster.model.resultat.Resultat;
+import org.imt.tournamentmaster.service.resultat.ResultatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.imt.tournamentmaster.service.resultat.ResultatService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/resultat")
@@ -22,8 +24,11 @@ public class ResultatController {
     }
 
     @GetMapping("/{id}")
-    public Resultat getById(@PathVariable int id) {
-        return resultatService.getById(id);
+    public ResponseEntity<Resultat> getById(@PathVariable long id) {
+        Optional<Resultat> resultat = resultatService.getById(id);
+
+        return resultat.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping

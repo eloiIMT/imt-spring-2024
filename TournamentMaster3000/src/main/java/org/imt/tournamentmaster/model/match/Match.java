@@ -1,21 +1,27 @@
 package org.imt.tournamentmaster.model.match;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.List;
 import java.util.Objects;
 
-// Quand cette classe est transformée en entité, il faut spécifier le nom de la table en `match` en incluant les backquotes ` car match est un mot-clé réservé en SQL
+@Entity
+@Table(name = "`match`")
 public class Match {
 
     @JsonIgnore
+    @Id
     private long id;
 
+    @OneToOne
     private Equipe equipeA;
 
+    @OneToOne
     private Equipe equipeB;
 
+    @OneToMany
     private List<Round> rounds; // Set est un type de collection, on va éviter les confusions et appeler ça un "round"
 
     private Status status;
