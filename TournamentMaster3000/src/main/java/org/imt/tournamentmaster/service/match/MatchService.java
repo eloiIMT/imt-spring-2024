@@ -26,6 +26,9 @@ public class MatchService {
     }
 
     @Transactional(readOnly = true)
+    public  List<Match> getByStatus(Match.Status status) { return matchRepository.findByStatus(status);}
+
+    @Transactional(readOnly = true)
     public List<Match> getAll() {
         return StreamSupport.stream(matchRepository.findAll().spliterator(), false)
                 .toList();

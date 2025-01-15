@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,11 @@ public class MatchController {
 
         return updatedMatch.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/getByStatus/{status}")
+    public List<Match> getByStatus(@PathVariable Match.Status status) {
+        return matchService.getByStatus(status);
     }
 
     @GetMapping
