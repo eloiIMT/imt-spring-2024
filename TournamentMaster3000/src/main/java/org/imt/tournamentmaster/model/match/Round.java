@@ -1,6 +1,6 @@
 package org.imt.tournamentmaster.model.match;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 public class Round {
 
-    @JsonIgnore
+    @JsonProperty("roundId")
     @Id
     private long id;
 
