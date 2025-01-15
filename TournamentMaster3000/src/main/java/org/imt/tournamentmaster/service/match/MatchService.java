@@ -30,4 +30,9 @@ public class MatchService {
         return StreamSupport.stream(matchRepository.findAll().spliterator(), false)
                 .toList();
     }
+
+    @Transactional
+    public void deleteById(long id) {
+        matchRepository.deleteById(id);
+    }
 }

@@ -32,4 +32,10 @@ public class MatchController {
     public List<Match> getAll() {
         return matchService.getAll();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMatch(@PathVariable Long id) {
+        matchService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

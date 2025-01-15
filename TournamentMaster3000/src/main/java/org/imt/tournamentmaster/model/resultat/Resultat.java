@@ -1,9 +1,7 @@
 package org.imt.tournamentmaster.model.resultat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 import org.imt.tournamentmaster.model.match.Match;
 
@@ -16,7 +14,8 @@ public class Resultat {
     @Id
     private long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "match_id")
     private Match match;
 
 
