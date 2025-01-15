@@ -28,6 +28,14 @@ public class MatchController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Match> update(@PathVariable long id, @RequestBody Match match) {
+        Optional<Match> updatedMatch = Optional.ofNullable(matchService.save(match));
+
+        return updatedMatch.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public List<Match> getAll() {
         return matchService.getAll();

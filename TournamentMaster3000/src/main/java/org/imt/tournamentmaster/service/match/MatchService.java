@@ -30,4 +30,9 @@ public class MatchService {
         return StreamSupport.stream(matchRepository.findAll().spliterator(), false)
                 .toList();
     }
+
+    @Transactional(readOnly = false)
+    public Match save(Match match) {
+        return matchRepository.save(match);
+    }
 }
