@@ -4,10 +4,7 @@ import org.imt.tournamentmaster.model.equipe.Equipe;
 import org.imt.tournamentmaster.service.equipe.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +25,14 @@ public class EquipeController {
         Optional<Equipe> equipe = equipeService.getById(id);
 
         return equipe.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Equipe> update(@PathVariable long id, @RequestBody Equipe equipe) {
+        Optional<Equipe> updatedEquipe = Optional.ofNullable(equipeService.save(equipe));
+
+        return updatedEquipe.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

@@ -31,7 +31,7 @@ public class MatchService {
                 .toList();
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Match save(Match match) {
         return matchRepository.save(match);
     }
