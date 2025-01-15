@@ -1,6 +1,5 @@
 package org.imt.tournamentmaster.model.match;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 import org.imt.tournamentmaster.model.resultat.Resultat;
@@ -12,7 +11,6 @@ import java.util.Objects;
 @Table(name = "`match`")
 public class Match {
 
-    @JsonIgnore
     @Id
     private long id;
 

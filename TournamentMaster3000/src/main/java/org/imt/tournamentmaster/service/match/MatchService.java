@@ -35,4 +35,9 @@ public class MatchService {
     public void deleteById(long id) {
         matchRepository.deleteById(id);
     }
+
+    @Transactional
+    public Match save(Match match) {
+        return matchRepository.save(match);
+    }
 }
