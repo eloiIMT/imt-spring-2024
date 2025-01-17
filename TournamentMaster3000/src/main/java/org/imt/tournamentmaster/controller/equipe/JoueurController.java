@@ -36,6 +36,18 @@ public class JoueurController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping
+    public ResponseEntity<Joueur> createJoueur(@RequestBody Joueur joueur) {
+        Joueur createdJoueur = joueurService.save(joueur);
+        return ResponseEntity.ok(createdJoueur);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteJoueur(@PathVariable long id) {
+        joueurService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping
     public List<Joueur> getAllJoueurs() {
         return joueurService.getAll();

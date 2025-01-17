@@ -35,4 +35,8 @@ public class JoueurService {
     public Joueur save(Joueur joueur) {
         return joueurRepository.save(joueur);
     }
+
+    public void delete(long id) {
+        joueurRepository.deleteById(id);
+    }
 }
