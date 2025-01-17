@@ -30,17 +30,25 @@ public class JoueurController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Joueur> updateJoueur(@PathVariable long id, @RequestBody Joueur joueur) {
-        Optional<Joueur> updatedJoueur = Optional.ofNullable(joueurService.save(joueur));
+        try {
+            Optional<Joueur> updatedJoueur = Optional.ofNullable(joueurService.save(joueur));
 
-        return updatedJoueur.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+            return updatedJoueur.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping
     public ResponseEntity<Joueur> createJoueur(@RequestBody Joueur joueur) {
-        Joueur createdJoueur = joueurService.save(joueur);
-        return ResponseEntity.ok(createdJoueur);
-    }
+        try {
+            Joueur createdJoueur = joueurService.save(joueur);
+            return ResponseEntity.ok(createdJoueur);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteJoueur(@PathVariable long id) {

@@ -3,6 +3,7 @@ package org.imt.tournamentmaster.model.equipe;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.hibernate.validator.constraints.Range;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class Joueur {
 
     private String prenom;
 
+    @Range(min = 1, max = 12)
     private int numero;
 
     public Joueur() {

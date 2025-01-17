@@ -1,5 +1,7 @@
 package org.imt.tournamentmaster.service.equipe;
 
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.imt.tournamentmaster.model.equipe.Joueur;
 import org.imt.tournamentmaster.repository.equipe.JoueurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,14 @@ public class JoueurService {
 
     @Transactional
     public Joueur save(Joueur joueur) {
-        return joueurRepository.save(joueur);
+        Validator validator = Validation
+                .buildDefaultValidatorFactory().getValidator();
+
+        if (validator.validate(joueur).isEmpty()) {
+            return joueurRepository.save(joueur);
+        } else {
+            throw new IllegalArgumentException("Invalid Joueur");
+        }
     }
 
     public void delete(long id) {
