@@ -1,4 +1,16 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/tournamentmaster
+      SPRING_DATASOURCE_USERNAME: imt
+      SPRING_DATASOURCE_PASSWORD: imt
 
   #serveur de base de donnees
   database:
